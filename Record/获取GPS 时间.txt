@@ -1,0 +1,35 @@
+Android开发，GPS获取实时时间并转为北京时间，定位信息，海拔高度，并进行显示
+http://blog.csdn.net/qq_23922117/article/details/72625345
+
+
+location.getTime()+long()
+UTC时间慢约16个小时 getTime精确到毫秒
+
+@SuppressLint("SimpleDateFormat")  
+    private static String getGpsLoaalTime(long gpsTime){  
+        Calendar calendar = Calendar.getInstance();  
+          
+        calendar.setTimeInMillis(gpsTime);  
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");  
+        String datestring = df.format(calendar.getTime());  
+          
+        return datestring;  
+    }  
+	
+
+private void updateView(Location location) {    
+        if (location != null) {    
+            editText.setText("设备位置信息\n\n时间：");    
+            editText.append(""+getGpsLoaalTime(location.getTime());    
+            editText.append("\n经度：");    
+            editText.append(String.valueOf(location.getLongitude()));  
+            editText.append("\n纬度：");    
+            editText.append(String.valueOf(location.getLatitude()));  
+            editText.append("\n海拔：");    
+            editText.append(String.valueOf(location.getAltitude()));  
+              
+        } else {    
+            // 清空EditText对象    
+            editText.getEditableText().clear();    
+        }    
+    }  
